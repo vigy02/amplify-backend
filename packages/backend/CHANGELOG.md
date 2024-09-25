@@ -1,5 +1,17 @@
 # @aws-amplify/backend
 
+## 1.3.1
+
+### Patch Changes
+
+- d9212d8: Fix: Clear generated env directory before shim generation
+- 0adf873: fix: delete generated folder at start of synth
+- 05e1fd5: Clear the shim generation directory
+- ab7f76f: fix: clearing the .amplify/generated/env/ before synthesis
+- Updated dependencies [d9212d8]
+- Updated dependencies [05e1fd5]
+  - @aws-amplify/backend-function@1.5.1
+
 ## 1.3.0
 
 ### Minor Changes

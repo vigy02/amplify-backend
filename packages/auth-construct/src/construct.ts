@@ -51,6 +51,7 @@ import {
   StackMetadataBackendOutputStorageStrategy,
 } from '@aws-amplify/backend-output-storage';
 import * as path from 'path';
+import * as lambda from 'aws-cdk-lib/aws-lambda';
 
 type DefaultRoles = { auth: Role; unAuth: Role };
 type IdentityProviderSetupResult = {
@@ -503,13 +504,26 @@ export class AmplifyAuth
       customAttributes: {
         ...customAttributes,
       },
+      // email: props.senders
+      //   ? cognito.UserPoolEmail.withSES({
+      //       fromEmail: props.senders.email.fromEmail,
+      //       fromName: props.senders.email.fromName,
+      //       replyTo: props.senders.email.replyTo,
+      //       sesRegion: Stack.of(this).region,
+      //     })
+      //   :undefined,
       email: props.senders
-        ? cognito.UserPoolEmail.withSES({
-            fromEmail: props.senders.email.fromEmail,
-            fromName: props.senders.email.fromName,
-            replyTo: props.senders.email.replyTo,
-            sesRegion: Stack.of(this).region,
-          })
+        ? props.senders.email instanceof lambda.Function
+          ? {
+              lambdaArn: props.senders.email.functionArn,
+              lambdaVersion: 'V1_0',
+            }
+          : cognito.UserPoolEmail.withSES({
+              fromEmail: props.senders.email.fromEmail,
+              fromName: props.senders.email.fromName,
+              replyTo: props.senders.email.replyTo,
+              sesRegion: Stack.of(this).region,
+            })
         : undefined,
 
       selfSignUpEnabled: DEFAULTS.ALLOW_SELF_SIGN_UP,

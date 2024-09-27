@@ -421,6 +421,8 @@ export type AuthProps = {
      * Configure Cognito to send emails from SES
      * SES configurations enable the use of customized email sender addresses and names
      * @see https://docs.amplify.aws/react/build-a-backend/auth/moving-to-production/#email
+     * Configure a custom lambda function to send emails and trigger emails
+     * @see https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-lambda-custom-email-sender.html
      */
     email:
       | Pick<UserPoolSESOptions, 'fromEmail' | 'fromName' | 'replyTo'>

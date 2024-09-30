@@ -504,27 +504,19 @@ export class AmplifyAuth
       customAttributes: {
         ...customAttributes,
       },
-      // email: props.senders
-      //   ? cognito.UserPoolEmail.withSES({
-      //       fromEmail: props.senders.email.fromEmail,
-      //       fromName: props.senders.email.fromName,
-      //       replyTo: props.senders.email.replyTo,
-      //       sesRegion: Stack.of(this).region,
-      //     })
-      //   :undefined,
       email: props.senders
-        ? props.senders.email instanceof lambda.Function
-          ? {
-              lambdaArn: props.senders.email.functionArn,
-              lambdaVersion: 'V1_0',
-            }
-          : cognito.UserPoolEmail.withSES({
-              fromEmail: props.senders.email.fromEmail,
-              fromName: props.senders.email.fromName,
-              replyTo: props.senders.email.replyTo,
-              sesRegion: Stack.of(this).region,
-            })
+        ? cognito.UserPoolEmail.withSES({
+            fromEmail: props.senders.email.fromEmail,
+            fromName: props.senders.email.fromName,
+            replyTo: props.senders.email.replyTo,
+            sesRegion: Stack.of(this).region,
+          })
         : undefined,
+      lambdaTriggers: {
+        ...(props.senders?.email instanceof lambda.Function
+          ? { customEmailSender: props.senders.email }
+          : {}),
+      },
 
       selfSignUpEnabled: DEFAULTS.ALLOW_SELF_SIGN_UP,
       mfa: mfaMode,

@@ -97,7 +97,7 @@ void describe('generate outputs command', () => {
       commandRunner.runCommand('outputs --stack 1invalid --out-dir /foo/bar'),
       {
         name: 'AmplifyUserError',
-        code: 'InvalidStackName',
+        code: 'InvalidStackNameError',
       }
     );
   });

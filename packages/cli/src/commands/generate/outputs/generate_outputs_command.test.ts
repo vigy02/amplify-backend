@@ -95,8 +95,7 @@ void describe('generate outputs command', () => {
 
   void it('throws an error for invalid stack name', async () => {
     await assert.rejects(
-      () =>
-        commandRunner.runCommand('outputs --stack 1invalid --out-dir /foo/bar'),
+      commandRunner.runCommand('outputs --stack 1invalid --out-dir /foo/bar'),
       (error: AmplifyUserError) => {
         assert.strictEqual(error.name, 'InvalidStackNameError');
         assert.strictEqual(error.message, 'Invalid stack name: 1invalid');

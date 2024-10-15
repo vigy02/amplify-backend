@@ -1,5 +1,16 @@
 # @aws-amplify/backend
 
+## 1.5.0
+
+### Minor Changes
+
+- 4720412: Add minify option to defineFunction
+
+### Patch Changes
+
+- Updated dependencies [4720412]
+  - @aws-amplify/backend-function@1.7.0
+
 ## 1.4.0
 
 ### Minor Changes

@@ -55,6 +55,17 @@ export class GenerateOutputsCommand
   handler = async (
     args: ArgumentsCamelCase<GenerateOutputsCommandOptions>
   ): Promise<void> => {
+    if (args.stack) {
+      const identifierRegex = /^[a-zA-Z][-_a-zA-Z0-9/]*$/;
+      if (!args.stack.match(identifierRegex)) {
+        throw new AmplifyUserError('InvalidStackNameError', {
+          message: `Invalid stack name: ${args.stack}`,
+          resolution:
+            'Stack name must start with a letter and can only contain alphanumeric characters, hyphens, underscores and slashes.',
+        });
+      }
+    }
+
     const backendIdentifier =
       await this.backendIdentifierResolver.resolveDeployedBackendIdentifier(
         args

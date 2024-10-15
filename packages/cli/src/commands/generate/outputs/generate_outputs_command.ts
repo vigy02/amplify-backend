@@ -87,16 +87,18 @@ export class GenerateOutputsCommand
         type: 'string',
         array: false,
         group: 'Stack identifier',
-        coerce: (arg: string) => {
-          if (/^[a-zA-Z][-_a-zA-Z0-9/]*$/.test(arg)) {
+      })
+      .check((argv) => {
+        if (argv.stack) {
+          if (!/^[a-zA-Z][-_a-zA-Z0-9/]*$/.test(argv.stack)) {
             throw new AmplifyUserError('InvalidStackNameError', {
-              message: `Invalid stack name: ${arg}`,
+              message: `Invalid stack name: ${argv.stack}`,
               resolution:
                 'Stack name must start with a letter and can only contain alphanumeric characters, hyphens, underscores and slashes.',
             });
           }
-          return arg;
-        },
+        }
+        return true;
       })
       .option('app-id', {
         conflicts: ['stack'],

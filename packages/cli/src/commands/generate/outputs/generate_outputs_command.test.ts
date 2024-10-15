@@ -97,6 +97,7 @@ void describe('generate outputs command', () => {
       commandRunner.runCommand('outputs --stack 1invalid --out-dir /foo/bar'),
       {
         name: 'InvalidStackNameError',
+        message: 'Invalid stack name: 1invalid',
       }
     );
   });

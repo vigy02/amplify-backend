@@ -88,11 +88,11 @@ export class GenerateOutputsCommand
         array: false,
         group: 'Stack identifier',
         coerce: (arg: string) => {
-          if (!/^[a-zA-Z][-_a-zA-Z0-9/]*$/.test(arg)) {
+          if (/^[a-zA-Z][-_a-zA-Z0-9/]*$/.test(arg)) {
             throw new AmplifyUserError('InvalidStackNameError', {
               message: `Invalid stack name: ${arg}`,
               resolution:
-                'Stack name must start with a letter and can only contain alphanumeric characters, hyphens, and slashes.',
+                'Stack name must start with a letter and can only contain alphanumeric characters, hyphens, underscores and slashes.',
             });
           }
           return arg;

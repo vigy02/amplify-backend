@@ -82,6 +82,36 @@ void describe('generate outputs command', () => {
     );
   });
 
+  void it('generates and writes config for stack with slashes', async () => {
+    await commandRunner.runCommand(
+      'outputs --stack parent/child --out-dir /foo/bar'
+    );
+    assert.equal(generateClientConfigMock.mock.callCount(), 1);
+    assert.deepEqual(generateClientConfigMock.mock.calls[0].arguments[0], {
+      stackName: 'parent/child',
+    });
+  });
+
+  void it('throws an error for invalid stack name', async () => {
+    await assert.rejects(
+      commandRunner.runCommand('outputs --stack 1invalid --out-dir /foo/bar'),
+      {
+        name: 'AmplifyUserError',
+        code: 'InvalidStackName',
+      }
+    );
+  });
+
+  void it('accepts valid stack name with hyphens', async () => {
+    await commandRunner.runCommand(
+      'outputs --stack valid-stack-name --out-dir /foo/bar'
+    );
+    assert.equal(generateClientConfigMock.mock.callCount(), 1);
+    assert.deepEqual(generateClientConfigMock.mock.calls[0].arguments[0], {
+      stackName: 'valid-stack-name',
+    });
+  });
+
   void it('generates and writes config for branch', async () => {
     await commandRunner.runCommand(
       'outputs --branch branch_name --out-dir /foo/bar'

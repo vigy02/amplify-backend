@@ -88,18 +88,6 @@ export class GenerateOutputsCommand
         array: false,
         group: 'Stack identifier',
       })
-      .check((argv) => {
-        if (argv.stack) {
-          if (!/^[a-zA-Z][-_a-zA-Z0-9/]*$/.test(argv.stack)) {
-            throw new AmplifyUserError('InvalidStackNameError', {
-              message: `Invalid stack name: ${argv.stack}`,
-              resolution:
-                'Stack name must start with a letter and can only contain alphanumeric characters, hyphens, underscores and slashes.',
-            });
-          }
-        }
-        return true;
-      })
       .option('app-id', {
         conflicts: ['stack'],
         describe: 'The Amplify App ID of the project',
@@ -134,6 +122,19 @@ export class GenerateOutputsCommand
         array: false,
         choices: Object.values(ClientConfigVersionOption),
         default: DEFAULT_CLIENT_CONFIG_VERSION,
+      })
+      .check((argv) => {
+        if (argv.stack) {
+          const identifierRegex = /^[a-zA-Z][-_a-zA-Z0-9/]*$/;
+          if (!argv.stack.match(identifierRegex)) {
+            throw new AmplifyUserError('InvalidStackNameError', {
+              message: `Invalid stack name: ${argv.stack}`,
+              resolution:
+                'Stack name must start with a letter and can only contain alphanumeric characters, hyphens, underscores and slashes.',
+            });
+          }
+        }
+        return true;
       });
   };
 }

@@ -96,8 +96,7 @@ void describe('generate outputs command', () => {
     await assert.rejects(
       commandRunner.runCommand('outputs --stack 1invalid --out-dir /foo/bar'),
       {
-        name: 'AmplifyUserError',
-        code: 'InvalidStackNameError',
+        name: 'InvalidStackNameError',
       }
     );
   });

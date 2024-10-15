@@ -2,7 +2,10 @@ import { beforeEach, describe, it, mock } from 'node:test';
 import { GenerateOutputsCommand } from './generate_outputs_command.js';
 import { ClientConfigFormat } from '@aws-amplify/client-config';
 import yargs, { CommandModule } from 'yargs';
-import { TestCommandRunner } from '../../../test-utils/command_runner.js';
+import {
+  TestCommandError,
+  TestCommandRunner,
+} from '../../../test-utils/command_runner.js';
 import assert from 'node:assert';
 import { AppBackendIdentifierResolver } from '../../../backend-identifier/backend_identifier_resolver.js';
 import { ClientConfigGeneratorAdapter } from '../../../client-config/client_config_generator_adapter.js';
@@ -94,10 +97,12 @@ void describe('generate outputs command', () => {
 
   void it('throws an error for invalid stack name', async () => {
     await assert.rejects(
-      commandRunner.runCommand('outputs --stack 1invalid --out-dir /foo/bar'),
-      {
-        name: 'InvalidStackNameError',
-        message: 'Invalid stack name: 1invalid',
+      () =>
+        commandRunner.runCommand('outputs --stack 1invalid --out-dir /foo/bar'),
+      (error: TestCommandError) => {
+        assert.strictEqual(error.error.name, 'InvalidStackNameError');
+        assert.strictEqual(error.error.message, 'Invalid stack name: 1invalid');
+        return true;
       }
     );
   });

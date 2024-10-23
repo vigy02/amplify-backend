@@ -1,5 +1,13 @@
 # @aws-amplify/backend-ai
 
+## 0.3.3
+
+### Patch Changes
+
+- 0d6489d: Use AiModel from data-schema-types as possible input
+- Updated dependencies [5f46d8d]
+  - @aws-amplify/backend-output-schemas@1.4.0
+
 ## 0.3.2
 
 ### Patch Changes

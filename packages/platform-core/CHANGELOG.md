@@ -1,5 +1,17 @@
 # @aws-amplify/platform-core
 
+## 1.3.0
+
+### Minor Changes
+
+- 65abf6a: Add options to control log settings
+
+### Patch Changes
+
+- cfdc854: return amplify user error as it is from `AmplifyError.fromError`
+- Updated dependencies [72b2fe0]
+  - @aws-amplify/plugin-types@1.5.1
+
 ## 1.2.2
 
 ### Patch Changes

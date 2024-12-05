@@ -1,5 +1,14 @@
 # @aws-amplify/auth-construct
 
+## 1.5.1
+
+### Patch Changes
+
+- 72b2fe0: update aws-cdk lib to ^2.168.0
+- Updated dependencies [72b2fe0]
+  - @aws-amplify/backend-output-storage@1.1.4
+  - @aws-amplify/plugin-types@1.5.1
+
 ## 1.5.0
 
 ### Minor Changes

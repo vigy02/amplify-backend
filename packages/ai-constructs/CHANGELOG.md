@@ -1,5 +1,20 @@
 # @aws-amplify/ai-constructs
 
+## 1.1.0
+
+### Minor Changes
+
+- 65abf6a: Add options to control log settings
+
+### Patch Changes
+
+- 72b2fe0: update aws-cdk lib to ^2.168.0
+- Updated dependencies [cfdc854]
+- Updated dependencies [72b2fe0]
+- Updated dependencies [65abf6a]
+  - @aws-amplify/platform-core@1.3.0
+  - @aws-amplify/plugin-types@1.5.1
+
 ## 1.0.0
 
 ### Major Changes
